@@ -8,7 +8,6 @@ sudo mkdir -p /mnt/bin
 sudo chown ubuntu:ubuntu /mnt/bin
 
 # install the required packages
-sudo apt-get update && sudo apt-get -y upgrade
 sudo apt-get -y install linux-headers-$(uname -r) linux-image-extra-`uname -r`
 
 # install cuda
@@ -56,7 +55,7 @@ sudo apt-get -y install htop
 exec bash
 ############################################
 # run the test
-# byobu				# start byobu + press Ctrl + F2 
+# byobu				# start byobu + press Ctrl + F2
 # htop				# run in window 1, press Shift + F2
 # watch --color -n1.0 gpustat -cp	# run in window 2, press Shift + <left>
 # wget https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/models/image/mnist/convolutional.py
