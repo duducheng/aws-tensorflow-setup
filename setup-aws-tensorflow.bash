@@ -4,8 +4,8 @@
 set -e
 ############################################
 # install into /mnt/bin
-sudo mkdir -p /mnt/bin
-sudo chown ubuntu:ubuntu /mnt/bin
+sudo mkdir -p $HOME/install
+sudo chown ubuntu:ubuntu $HOME/install
 
 # install the required packages
 sudo apt-get -y install linux-headers-$(uname -r) linux-image-extra-`uname -r`
@@ -36,14 +36,34 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_ROOT/lib64
 
 # install anaconda
 wget http://repo.continuum.io/archive/Anaconda3-4.0.0-Linux-x86_64.sh
-bash Anaconda3-4.0.0-Linux-x86_64.sh -b -p /mnt/bin/anaconda3
+bash Anaconda3-4.0.0-Linux-x86_64.sh -b -p $HOME/install/anaconda3
 rm Anaconda3-4.0.0-Linux-x86_64.sh
-echo 'export PATH="/mnt/bin/anaconda3/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/install/anaconda3/bin:$PATH"' >> ~/.bashrc
 
 # install tensorflow
 export TF_BINARY_URL='https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.9.0rc0-cp35-cp35m-linux_x86_64.whl'
 
-/mnt/bin/anaconda3/bin/pip install $TF_BINARY_URL
+$HOME/install/anaconda3/bin/pip install $TF_BINARY_URL
+
+# install and configure Keras
+pip install keras
+echo "import keras" | python
+echo "
+{
+    "backend": "tensorflow",
+    "epsilon": 1e-07,
+    "floatx": "float32",
+    "image_dim_ordering": "tf"
+}
+" > ~/.keras/keras.json
+
+# configure Jupyter Notebook
+jupyter notebook --generate-config
+echo "
+c.NotebookApp.ip = '*'
+c.NotebookApp.open_browser = False
+c.NotebookApp.port = 9999
+" >> .jupyter/jupyter_notebook_config.py
 
 # install monitoring programs
 sudo wget https://git.io/gpustat -O /usr/local/bin/gpustat
