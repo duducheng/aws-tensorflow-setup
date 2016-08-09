@@ -32,18 +32,21 @@ echo 'export CUDA_HOME=/usr/local/cuda
 export CUDA_ROOT=/usr/local/cuda
 export PATH=$PATH:$CUDA_ROOT/bin:$HOME/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_ROOT/lib64
-' >> ~/.bashrc
+' >> ~/.bash_profile
 
 # install anaconda
 wget http://repo.continuum.io/archive/Anaconda3-4.0.0-Linux-x86_64.sh
 bash Anaconda3-4.0.0-Linux-x86_64.sh -b -p $HOME/install/anaconda3
 rm Anaconda3-4.0.0-Linux-x86_64.sh
-echo 'export PATH="$HOME/install/anaconda3/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/install/anaconda3/bin:$PATH"' >> ~/.bash_profile
+
+# export env vars
+source .bash_profile
 
 # install tensorflow
 export TF_BINARY_URL='https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.9.0rc0-cp35-cp35m-linux_x86_64.whl'
 
-$HOME/install/anaconda3/bin/pip install $TF_BINARY_URL
+pip install $TF_BINARY_URL
 
 # install and configure Keras
 pip install keras
@@ -71,8 +74,6 @@ sudo chmod +x /usr/local/bin/gpustat
 sudo nvidia-smi daemon
 sudo apt-get -y install htop
 
-# reload .bashrc
-exec bash
 ############################################
 # run the test
 # byobu				# start byobu + press Ctrl + F2
