@@ -41,7 +41,7 @@ rm Anaconda3-4.0.0-Linux-x86_64.sh
 echo 'export PATH="$HOME/install/anaconda3/bin:$PATH"' >> ~/.bash_profile
 
 # export env vars
-source .bash_profile
+source $HOME/.bash_profile
 
 # install tensorflow
 export TF_BINARY_URL='https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.9.0rc0-cp35-cp35m-linux_x86_64.whl'
@@ -51,14 +51,14 @@ pip install $TF_BINARY_URL
 # install and configure Keras
 pip install keras
 echo "import keras" | python
-echo "
+echo '
 {
     "backend": "tensorflow",
     "epsilon": 1e-07,
     "floatx": "float32",
     "image_dim_ordering": "tf"
 }
-" > ~/.keras/keras.json
+' > ~/.keras/keras.json
 
 # configure Jupyter Notebook
 jupyter notebook --generate-config
