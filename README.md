@@ -1,4 +1,4 @@
-# Setting up TensorFlow 0.9 with Python 3.5 on AWS GPU-instance
+# Setting up TensorFlow 0.12rc with Python 3.5 on AWS GPU-instance
 
 ## Description
 
@@ -26,18 +26,15 @@ Forked from:
 - Launch a `p2.xlarge` instance running Ubuntu server
 - Log in to your instance via SSH
 
-For more details, see the beginning of this blog post: <http://max-likelihood.com/2016/06/18/aws-tensorflow-setup/>. Though make sure to open the additional ports if you wish to use the Jupyter Notebook.
-
 ## Setting up TensorFlow + Keras with GPU support
-
 - Update `apt-get` and packages
 ```bash
 sudo apt-get update && sudo apt-get -y upgrade
 sudo apt-get install -y build-essential git python-pip
 sudo pip install awscli
-aws s3 sync s3:// `your s3 path` $HOME/s3
+aws configure
+# aws s3 sync s3:// `your s3 path` $HOME/s3
 ```
-
 - Clone this repo
 ```bash
 git clone https://github.com/duducheng/aws-tensorflow-setup
@@ -46,11 +43,8 @@ git clone https://github.com/duducheng/aws-tensorflow-setup
 ```bash
 ./aws-tensorflow-setup/setup-aws-tensorflow.bash
 ```
-- Source your bash profile to set environment variables
-```bash
-source ~/.bash_profile
-```
-- (Optional) Launch a Jupyter Notebook server
+**Note**: When installing Anaconda3, it may cause some problems. If it doesn't work well, run the scipts from "# install anaconda" again.
+- Launch a Jupyter Notebook server
 ```bash
 jupyter Notebook
 ```
