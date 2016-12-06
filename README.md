@@ -2,29 +2,28 @@
 
 ## Description
 
-`setup-aws-tensorflow.bash` installs the following things on the ec2 `g2.2xlarge` instance running Ubuntu 14.04:
+`setup-aws-tensorflow.bash` installs the following things on the ec2 `p2.xlarge` instance running Ubuntu 14.04:
 
 - Required linux packages
-- CUDA 7.5
-- cuDNN v4
+- CUDA 8.0
+- cuDNN v5.1
 - Anaconda with Python 3.5
-- TensorFlow 0.9
+- TensorFlow 0.12rc
 - Keras
 - GPU usage tool `gpustat`
 
 Also configures the Jupyter Notebook for interactive use
 
 Forked from:
-<https://github.com/Avsecz/aws-tensorflow-setup>
+<https://github.com/jwittenbach/aws-tensorflow-setup>
 
-Based on the blog post: <http://max-likelihood.com/2016/06/18/aws-tensorflow-setup/>.
 
 ## Preliminaries -- broad strokes steps
 
 - Install the Amazon Web Services CLI or use the AWS Dashboard online
 - Setup your AWS credentials
 - Create a security group with the following ports open to TCP/IP traffic: 22 (SSH), 80 (HTTP), 9999 (Jupyter Notebook)
-- Launch a `g2.2xlarge` instance running Ubuntu server (`ami-fce3c696`)
+- Launch a `p2.xlarge` instance running Ubuntu server
 - Log in to your instance via SSH
 
 For more details, see the beginning of this blog post: <http://max-likelihood.com/2016/06/18/aws-tensorflow-setup/>. Though make sure to open the additional ports if you wish to use the Jupyter Notebook.
@@ -34,14 +33,14 @@ For more details, see the beginning of this blog post: <http://max-likelihood.co
 - Update `apt-get` and packages
 ```bash
 sudo apt-get update && sudo apt-get -y upgrade
+sudo apt-get install -y build-essential git python-pip
+sudo pip install awscli
+aws s3 sync s3:// `your s3 path` $HOME/s3
 ```
-- Install `git`
-```bash
-sudo apt-get install -y git
-```
+
 - Clone this repo
 ```bash
-git clone https://github.com/jwittenbach/aws-tensorflow-setup
+git clone https://github.com/duducheng/aws-tensorflow-setup
 ```
 - Run the installation script
 ```bash

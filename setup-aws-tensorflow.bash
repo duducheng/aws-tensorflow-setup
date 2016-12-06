@@ -11,21 +11,15 @@ sudo chown ubuntu:ubuntu $HOME/install
 sudo apt-get -y install linux-headers-$(uname -r) linux-image-extra-`uname -r`
 
 # install cuda
-wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.5-18_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu1404_7.5-18_amd64.deb
-rm cuda-repo-ubuntu1404_7.5-18_amd64.deb
+wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb
+sudo dpkg -i cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb
+rm cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb
 sudo apt-get update
 sudo apt-get install -y cuda
 
 # get cudnn
-CUDNN_FILE=cudnn-7.0-linux-x64-v4.0-prod.tgz
-wget http://developer.download.nvidia.com/compute/redist/cudnn/v4/${CUDNN_FILE}
-tar xvzf ${CUDNN_FILE}
-rm ${CUDNN_FILE}
-sudo cp cuda/include/cudnn.h /usr/local/cuda/include # move library files to /usr/local/cuda
-sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
-sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
-rm -rf cuda
+sudo dpkg -i $HOME/s3/libcudnn5_5.1.5-1+cuda8.0_amd64.deb
+sudo dpkg -i $HOME/s3/libcudnn5-dev_5.1.5-1+cuda8.0_amd64.deb
 
 # set the appropriate library path
 echo 'export CUDA_HOME=/usr/local/cuda
@@ -44,12 +38,11 @@ echo 'export PATH="$HOME/install/anaconda3/bin:$PATH"' >> ~/.bash_profile
 source $HOME/.bash_profile
 
 # install tensorflow
-export TF_BINARY_URL='https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.9.0rc0-cp35-cp35m-linux_x86_64.whl'
-
-pip install $TF_BINARY_URL
+export TF_BINARY_URL="https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.0rc0-cp35-cp35m-linux_x86_64.whl"
+pip install --upgrade $TF_BINARY_URL
 
 # install and configure Keras
-pip install keras
+pip install git+https://github.com/fchollet/keras
 echo "import keras" | python
 echo '
 {
