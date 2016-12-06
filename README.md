@@ -10,7 +10,6 @@
 - Anaconda with Python 3.5
 - TensorFlow 0.12rc
 - Keras
-- GPU usage tool `gpustat`
 
 Also configures the Jupyter Notebook for interactive use
 
