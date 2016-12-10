@@ -17,13 +17,13 @@ rm cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64-deb
 sudo apt-get update
 sudo apt-get install -y cuda
 
-# get cudnn
-wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod/8.0/libcudnn5_5.1.5-1+cuda8.0_amd64-deb
-sudo dpkg -i libcudnn5_5.1.5-1+cuda8.0_amd64.deb
-rm libcudnn5_5.1.5-1+cuda8.0_amd64-deb
-wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod/8.0/libcudnn5-dev_5.1.5-1+cuda8.0_amd64-deb
-sudo dpkg -i libcudnn5-dev_5.1.5-1+cuda8.0_amd64.deb
-rm libcudnn5-dev_5.1.5-1+cuda8.0_amd64.deb
+# get cudnn: you should download your own cudnn (you need to register), and change the two links
+# wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod/8.0/libcudnn5_5.1.5-1+cuda8.0_amd64-deb
+# sudo dpkg -i libcudnn5_5.1.5-1+cuda8.0_amd64.deb
+# rm libcudnn5_5.1.5-1+cuda8.0_amd64-deb
+# wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod/8.0/libcudnn5-dev_5.1.5-1+cuda8.0_amd64-deb
+# sudo dpkg -i libcudnn5-dev_5.1.5-1+cuda8.0_amd64.deb
+# rm libcudnn5-dev_5.1.5-1+cuda8.0_amd64.deb
 
 # set the appropriate library path
 echo 'export CUDA_HOME=/usr/local/cuda
@@ -44,8 +44,7 @@ source $HOME/.bash_profile
 
 # install tensorflow
 pip install --ignore-installed --upgrade pip setuptools
-export TF_BINARY_URL="https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.0rc0-cp35-cp35m-linux_x86_64.whl"
-pip install --upgrade $TF_BINARY_URL
+pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.0rc1-cp35-cp35m-linux_x86_64.whl
 
 # install and configure Keras
 pip install git+https://github.com/fchollet/keras

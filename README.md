@@ -32,7 +32,7 @@ sudo apt-get update && sudo apt-get -y upgrade
 sudo apt-get install -y build-essential git python-pip
 sudo pip install awscli
 aws configure
-# aws s3 sync s3:// `your s3 path` $HOME/s3
+aws s3 sync s3:// `your s3 path` $HOME/s3
 ```
 - Clone this repo
 ```bash
