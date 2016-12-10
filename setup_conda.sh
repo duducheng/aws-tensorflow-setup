@@ -17,18 +17,6 @@ pip install --ignore-installed --upgrade pip setuptools
 export TF_BINARY_URL="https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.0rc0-cp35-cp35m-linux_x86_64.whl"
 pip install --upgrade $TF_BINARY_URL
 
-# install and configure Keras
-pip install git+https://github.com/fchollet/keras
-echo "import keras" | python
-echo '
-{
-    "backend": "tensorflow",
-    "epsilon": 1e-07,
-    "floatx": "float32",
-    "image_dim_ordering": "tf"
-}
-' > ~/.keras/keras.json
-
 # configure Jupyter Notebook
 jupyter notebook --generate-config
 echo "
@@ -37,7 +25,7 @@ c.NotebookApp.open_browser = False
 c.NotebookApp.port = 9999
 " >> .jupyter/jupyter_notebook_config.py
 
-# install some other libraries: theano, pymc3, Lasagne
+# install some other libraries: theano, pymc3, Lasagne, keras
 pip install git+https://github.com/theano/theano
 echo "
 [global]
@@ -49,3 +37,14 @@ cnmem = 1
 " >> $HOME/.theanorc
 pip install git+https://github.com/pymc-devs/pymc3
 pip install git+https://github.com/Lasagne/Lasagne
+
+pip install git+https://github.com/fchollet/keras
+echo "import keras" | python
+echo '
+{
+    "backend": "tensorflow",
+    "epsilon": 1e-07,
+    "floatx": "float32",
+    "image_dim_ordering": "tf"
+}
+' > ~/.keras/keras.json

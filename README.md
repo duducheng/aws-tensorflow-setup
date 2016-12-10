@@ -42,6 +42,11 @@ git clone https://github.com/duducheng/aws-tensorflow-setup
 ```bash
 ./aws-tensorflow-setup/setup-aws-tensorflow.bash
 ```
+or setup conda only
+```bash
+chmod +x ./aws-tensorflow-setup/setup_conda.sh
+./aws-tensorflow-setup/setup_conda.sh
+```
 **Note**: When installing Anaconda3, it may cause some problems. If it doesn't work well, run the scipts from "# install anaconda" again.
 - Launch a Jupyter Notebook server
 ```bash
